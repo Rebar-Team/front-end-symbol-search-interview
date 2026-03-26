@@ -161,7 +161,7 @@ At Rebar, we can't always ship the "perfect" feature. We have to prioritize what
 
 - **The Feedback Loop:** Our ML models only get better if they know when they were right or wrong. How would you capture and send "Accept/Deny" signals back to the backend? How do you ensure this doesn't slow down the user's workflow?
 
-- **Refine Rounds 1-2:** Instead of tackling a new challenge, refine and improve your implementation from Rounds 1-2. Focus on code quality, performance, UX polish, error handling, accessibility, or any aspect you think elevates the experience. This option shows your ability to iterate and perfect existing work.
+- **Show Your Strengths:** Maybe you're great at design, or code quality, or UX polish. Refine Rounds 1-2 and make them shine—accessibility, animations, interactions, or whatever you think matters most.
 
 - **The Wildcard:** What is the biggest "dealbreaker" you see in the current implementation that would prevent a user from actually finishing their job?
 
