@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/symbolsearch.tsx","./src/main.tsx","./src/helpers/index.ts","./src/movement/zoomcontrols.tsx","./src/movement/zoommanager.ts","./src/movement/index.ts","./src/movement/usepan.ts","./src/movement/usezoom.ts"],"errors":true,"version":"5.6.3"}
