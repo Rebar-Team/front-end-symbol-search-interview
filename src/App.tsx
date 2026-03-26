@@ -100,6 +100,7 @@ export default function App() {
                     flex: 1,
                     overflow: 'hidden',
                     cursor: 'grab',
+                    backgroundColor: '#e0e0e0',
                 }}
             >
                 <div style={{
