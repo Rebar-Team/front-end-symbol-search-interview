@@ -28,7 +28,7 @@ export function createToolSVG(tool: { color: string; shape: string; name: string
         return `
 <svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M12 2L22 20H2L12 2Z" fill="${color}" stroke="#fff" stroke-width="1.5"/>
-    <text x="12" y="17" text-anchor="middle" fill="#fff" font-size="7" font-weight="bold">${name}</text>
+    <text x="12" y="17" text-anchor="middle" fill="#fff" font-size="7" font-weight="bold" stroke="#87CEEB" stroke-width="0.5">${name}</text>
 </svg>`.trim()
     }
 
@@ -36,6 +36,6 @@ export function createToolSVG(tool: { color: string; shape: string; name: string
     return `
 <svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect x="4" y="6" width="16" height="12" rx="2" fill="${color}" stroke="#fff" stroke-width="1.5"/>
-    <text x="12" y="16" text-anchor="middle" fill="#fff" font-size="6" font-weight="bold">${name}</text>
+    <text x="12" y="16" text-anchor="middle" fill="#fff" font-size="6" font-weight="bold" stroke="#87CEEB" stroke-width="0.5">${name}</text>
 </svg>`.trim()
 }
