@@ -5,6 +5,7 @@ import { useZoom } from './movement/useZoom'
 import { usePan } from './movement/usePan'
 import { BBox } from './movement/ZoomManager'
 import { ZoomControls } from './movement/ZoomControls'
+import { PageHeader } from './PageHeader'
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`
 
@@ -12,6 +13,7 @@ export default function App() {
     const [numPages, setNumPages] = useState(0)
     const [page, setPage] = useState(1)
     const [size, setSize] = useState({ width: 0, height: 0 })
+    const [pageLoading, setPageLoading] = useState(false)
     const containerRef = useRef<HTMLDivElement>(null)
     const viewportRef = useRef<HTMLDivElement>(null)
 
@@ -82,12 +84,6 @@ export default function App() {
     return (
         <div ref={containerRef} style={{ width: '100vw', height: '100vh', overflow: 'hidden', margin: 0, padding: 0, display: 'flex' }}>
             <style>{`@keyframes spin { to { transform: rotate(360deg) } }`}</style>
-            <div style={{ height: 40, display: 'flex', alignItems: 'center', gap: 8, padding: '0 12px' }}>
-                <span>Bella Vista: </span>
-                <button onClick={() => setPage(p => Math.max(1, p - 1))}>Prev</button>
-                <span>Page {page} / {numPages} </span>
-                <button onClick={() => setPage(p => Math.min(numPages, p + 1))}>Next</button>
-            </div>
 
             <div 
                 ref={viewportRef}
@@ -103,29 +99,49 @@ export default function App() {
                     backgroundColor: '#e0e0e0',
                 }}
             >
-                <div style={{
-                    transform: transformStyle,
-                    transformOrigin: '0 0',
-                    transition: 'transform 0.15s ease-out',
-                }}>
-                    <Document file="/Hotel.pdf" onLoadSuccess={({ numPages }) => setNumPages(numPages)} loading={<div style={{ width: 24, height: 24, border: '3px solid #ccc', borderTopColor: '#333', borderRadius: '50%', animation: 'spin 0.6s linear infinite' }} />}>
-                        <Page 
-                            pageNumber={page} 
-                            height={size.height || undefined} 
-                            devicePixelRatio={window.devicePixelRatio * 4}
-                            renderAnnotationLayer={false} 
-                            renderTextLayer={false} 
-                        />
-                    </Document>
-                </div>
-                
-                <ZoomControls 
-                    scale={zoomState.scale}
-                    onZoomIn={handleZoomInButton}
-                    onZoomOut={handleZoomOutButton}
-                    onReset={reset}
+                <PageHeader
+                    name="AC Hotel"
+                    page={page}
+                    numPages={numPages}
+                    onPageChange={(p) => { setPageLoading(true); setPage(p) }}
                 />
-            </div>
+                {pageLoading && (
+                    <div style={{
+                        position: 'absolute',
+                        inset: 0,
+                        zIndex: 5,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        pointerEvents: 'none',
+                    }}>
+                        <div style={{ width: 28, height: 28, border: '3px solid #ccc', borderTopColor: '#333', borderRadius: '50%', animation: 'spin 0.6s linear infinite' }} />
+                    </div>
+                )}
+                    <div style={{
+                        transform: transformStyle,
+                        transformOrigin: '0 0',
+                        transition: 'transform 0.15s ease-out',
+                    }}>
+                        <Document file="/Hotel.pdf" onLoadSuccess={({ numPages }) => setNumPages(numPages)}>
+                            <Page 
+                                pageNumber={page} 
+                                height={size.height || undefined} 
+                                devicePixelRatio={window.devicePixelRatio * 4}
+                                renderAnnotationLayer={false} 
+                                renderTextLayer={false}
+                                onRenderSuccess={() => setPageLoading(false)}
+                            />
+                        </Document>
+                    </div>
+                    
+                    <ZoomControls 
+                        scale={zoomState.scale}
+                        onZoomIn={handleZoomInButton}
+                        onZoomOut={handleZoomOutButton}
+                        onReset={reset}
+                    />
+                </div>
 
             <SymbolSearch />
         </div>
