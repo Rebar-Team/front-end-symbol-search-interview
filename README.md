@@ -10,13 +10,18 @@ This is an **open-ended challenge** designed to evaluate how you think as a prod
 
 Users work with construction/architectural PDF documents and need to find and place symbols across pages. The workflow is:
 
-1. A user draws/selects a **symbol** they want to find (e.g., a linear diffuser)
+1. A user draws a box around a **symbol** they want to find (e.g., a linear diffuser)
 2. This symbol is sent to our backend ML model
-3. The backend returns a JSON response with all matching detections found across the document
+3. The backend returns a JSON response with coordinates of all matching detections found across the document
 4. The user reviews each detection and **confirms** (places the symbol) or **rejects** (dismisses the false positive)
 5. Your job: **Build the UI that lets users efficiently review and place these symbols**
 
 **Note:** Steps 1-3 are simulated in this exercise. The search results and images are pre-generated. You are building steps 4-5.
+
+<p>
+  <img src="readme-images/symbol.png" alt="Symbol" width="400" />
+  <img src="readme-images/dropped.png" alt="Dropped" width="400" />
+</p>
 
 ---
 
